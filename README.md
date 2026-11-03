@@ -39,3 +39,6 @@ multiple servo control
 
 4. 소스 코드 실행
    - python hw_servo.py
+
+## 모든 명령은 소스 파일이 있는 폴더에서 실행합니다.
+## SW는 Ctrl+C로 종료하며, HW는 약 8초 동안 동작한 뒤 자동 종료합니다.
