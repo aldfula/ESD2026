@@ -5,11 +5,11 @@ multiple servo control
 
 1. gpio 설치
    
-sudo apt update
-sudo apt install pigpio python3-pigpio
+- sudo apt update
+- sudo apt install pigpio python3-pigpio
 
 2. RPI에서 GPIO 제어 요청을 처리하는 백그라운드 프로그램 실행
-sudo pigpiod
+- sudo pigpiod
 
 3. 소스 코드 실행
-python3 source.py
+- python3 sw_servo_control.py
