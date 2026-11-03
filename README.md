@@ -30,6 +30,7 @@ multiple servo control
 
    - **Adafruit Blinka: Raspberry Pi에서 CircuitPython 기반 라이브러리를 사용할 수 있도록 지원**
    - **Adafruit ServoKit: PCA9685로 서보 모터의 각도를 제어**
+   - 
    3-1. Python 가상환경 준비
      - sudo apt install -y python3-venv python3-pip
      - 작업 폴더 생성
