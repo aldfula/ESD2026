@@ -1,56 +1,61 @@
 from adafruit_servokit import ServoKit
 import time
+import math
 
-# PCA9685 초기화 (16채널)
+# PCA9685 초기화
 kit = ServoKit(channels=16)
 
-# 실제 연결한 채널
+# 서보 채널
 SERVO1 = 0
 SERVO2 = 4
 SERVO3 = 8
 
-servos = [SERVO1, SERVO2, SERVO3]
+SERVOS = [SERVO1, SERVO2, SERVO3]
 
-# 서보의 펄스 폭 범위 설정
-for ch in servos:
+# 펄스 폭 설정 (1000~2000μs)
+for ch in SERVOS:
     kit.servo[ch].set_pulse_width_range(1000, 2000)
 
+# 왕복 운동 주기 (초)
+PERIOD = 4.0
+
+# 업데이트 간격 (초)
+INTERVAL = 0.02
+
 try:
-    # 1. 모든 서보 중앙
-    print("모든 서보 중앙 이동")
-
-    for ch in servos:
+    # 초기 위치 설정
+    for ch in SERVOS:
         kit.servo[ch].angle = 90
 
-    time.sleep(2)
+    time.sleep(1)
 
-    # 2. 각각 다른 각도로 이동
-    print("서보 개별 각도 제어")
+    start_time = time.monotonic()
 
-    kit.servo[SERVO1].angle = 60
-    kit.servo[SERVO2].angle = 120
-    kit.servo[SERVO3].angle = 90
+    while True:
+        # 경과 시간
+        t = time.monotonic() - start_time
 
-    time.sleep(2)
+        # -1 ~ 1 범위의 사인파
+        wave = math.sin(2 * math.pi * t / PERIOD)
 
-    # 3. 다른 위치로 이동
-    kit.servo[SERVO1].angle = 120
-    kit.servo[SERVO2].angle = 60
-    kit.servo[SERVO3].angle = 120
+        # 각 서보의 목표 각도
+        angle1 = 90 + 30 * wave
+        angle2 = 90 - 30 * wave
+        angle3 = 90 + 15 * wave
 
-    time.sleep(2)
+        # 서보 모터 제어
+        kit.servo[SERVO1].angle = angle1
+        kit.servo[SERVO2].angle = angle2
+        kit.servo[SERVO3].angle = angle3
 
-    # 4. 중앙 복귀
-    print("중앙 복귀")
+        time.sleep(INTERVAL)
 
-    for ch in servos:
-        kit.servo[ch].angle = 90
-
-    time.sleep(2)
+except KeyboardInterrupt:
+    print("\n서보 제어 종료")
 
 finally:
-    # PWM 신호 중지
-    for ch in servos:
+    # PWM 출력 중지
+    for ch in SERVOS:
         kit.servo[ch].angle = None
 
     print("프로그램 종료")
