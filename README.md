@@ -12,7 +12,7 @@ multiple servo control
    - sudo pigpiod
 
 3. 소스 코드 실행
-   - python3 sw_servo_control.py
+   - python3 sw_servo.py
 
 
 ## HW
@@ -32,7 +32,6 @@ multiple servo control
    - **Adafruit ServoKit: PCA9685로 서보 모터의 각도를 제어**
    1. Python 가상환경 준비
       - sudo apt install -y python3-venv python3-pip
-      - 작업 폴더 생성
       - python3 -m venv .venv
       - source .venv/bin/activate
    2. 라이브러리 설치
