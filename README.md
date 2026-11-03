@@ -37,3 +37,6 @@ multiple servo control
       - source .venv/bin/activate
    2. 라이브러리 설치
       - python -m pip install adafruit-blinka adafruit-circuitpython-servokit
+
+4. 소스 코드 실행
+   - python hw_servo.py
