@@ -3,7 +3,7 @@ multiple servo control
 
 ## SW
 
-1. gpio 설치
+1. pigpio 설치
    
    - sudo apt update
    - sudo apt install pigpio python3-pigpio
